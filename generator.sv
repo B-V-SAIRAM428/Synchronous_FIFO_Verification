@@ -21,22 +21,28 @@
 class generator;
     mailbox gen2dri;
     transaction trans;
-    int wr_count =520 ;
-    int rd_count =0 ;
+    int wr_count =512 ;
+    int rd_count =512 ;
+    int idle = 4;
     int total= wr_count + rd_count;
     function new(mailbox gen2dri);
         this.gen2dri = gen2dri;
     endfunction
     
     task run();
-        int j, s;
+        int j,k, s;
         for(int i=0; i<total; i++) begin            
             trans = new();
             if (j < wr_count) begin
                 trans.randomize() with {wr_en == 1 && rd_en ==0;};
                j=j+1;
             end    
-            
+            else if ( k<idle) begin
+                trans.wr_data = 0;
+                trans.rd_en = 0;
+                trans.wr_en = 0;
+                k=k+1;
+            end
             else if ( s<rd_count) begin
                 trans.wr_data = 0;
                 trans.rd_en = 1;
