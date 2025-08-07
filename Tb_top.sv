@@ -44,6 +44,6 @@ module Tb_top(
         #10 rst = 0;
         t0 = new(vif);
         t0.run();
-        #200 $finish;
+        #5500 $finish;
     end
 endmodule
