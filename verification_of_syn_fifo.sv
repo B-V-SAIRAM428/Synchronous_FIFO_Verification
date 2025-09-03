@@ -64,7 +64,7 @@ class my_sequence extends uvm_sequence#(my_transaction);
 			trans.wr_data = 0;
 			finish_item(trans);
 		end
-		/*repeat (520) begin 
+		repeat (520) begin 
 			my_transaction trans;
 			trans = my_transaction :: type_id :: create("trans");
 			start_item(trans);
@@ -72,7 +72,7 @@ class my_sequence extends uvm_sequence#(my_transaction);
 			trans.rd_en = 1;
 			trans.wr_data=0;
 			finish_item(trans);
-		end*/
+		end
 	endtask
 endclass
 
@@ -325,4 +325,5 @@ module verification_of_syn_fifo ();
 		uvm_config_db#(virtual intf)::set(null, "*", "vif", vif);
 		run_test("my_test");
 	end
+
 endmodule
